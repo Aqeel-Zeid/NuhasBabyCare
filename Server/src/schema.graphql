@@ -1,0 +1,15 @@
+type Query
+{
+    hello(name: String): String
+    
+},
+
+type Mutation 
+{
+    testQuery(name : String):String
+},
+
+type Subscription 
+{
+    testSubscription: String
+}
