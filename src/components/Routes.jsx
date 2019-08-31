@@ -11,6 +11,7 @@ const Routes = () => {
         <>
             <Route exact path="/" component = {Home} />
             <Route exact path="/staff" component = {StaffHome} />
+            
         </>
     )
 }
