@@ -3,4 +3,44 @@ type User {
   name: String!
   email: String! @unique
   password: String!
+  reset : String
+}
+
+
+type Department {
+  departmentID : ID! @id
+  name : String! @unique
+}
+
+type Position {
+  positionId : ID! @id
+  department : Department!
+  basicSalary : Float
+  otRate : Float
+  jobRole : String @unique
+  contractBasis : Boolean
+  PerContractPrice : Float
+}
+
+type StaffMember {
+  EmployeeId: ID! @id
+  EmployeeName : String
+  Nic : String @unique
+  BancAccountNumber : String 
+  Position : Position
+  Address : String 
+  PhoneNumber : String 
+  HomeNumber : String
+  WorkEmail : String  @unique
+  Password : String 
+}
+
+type CardTemplate {
+  CardId: ID! @id
+  CardName : String @unique
+  Category: String
+  Price : Float 
+  Size : String
+  Material : String
+  SearchTags : String
 }
