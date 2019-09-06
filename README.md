@@ -1,10 +1,16 @@
-<h1 align="center"><strong>ITP Project 2019 SLIIT Kandy</strong></h1>
+
+<h1 align="center"><strong>ITP 2019 Group 2 </strong></h1>
+
 
 <br />
 
 
-<div align="center"><strong>🚀 Nuhas Baby Care Software</strong></div>
-<div align="center">ITP project using React and GraphQL Group 2 Sliit Kandy 2019</div>
+
+<div align="center"><strong>🚀Nuhas baby Care</strong></div>
+<div align="center">WebApp For baby shop</div>
+
+
+
 
 
 ## Contributing
@@ -17,3 +23,4 @@ Keshan
 Vidula
 Rukshan
 Arjuna
+
