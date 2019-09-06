@@ -1,5 +1,6 @@
 import React from 'react'
 import useForm from 'react-hook-form'
+import {useState} from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button, Container } from '@material-ui/core'
@@ -48,18 +49,17 @@ const CREATE_POSITION = gql`
 
 function CreateNewPositionForm() {
 
-
-
+    
 
     return (
-
+        <>
         <Formik
             initialValues={{
                 Position: '',
                 BasicSalary: '',
                 OTRate: '',
                 jobRole: '',
-                Department: 'Management'
+                Department: 'Human Resource Department'
             }}
             validationSchema={Yup.object().shape({
                 
@@ -112,13 +112,13 @@ function CreateNewPositionForm() {
             render={({ errors, status, touched }) => (
                 <Form>
                     <div className="form-group">
-                        <label htmlFor="jobRole">JobRole</label>
+                        <label htmlFor="jobRole">Job Role(Position)</label>
                         <Field name="jobRole" type="text" className={'form-control' + (errors.jobRole && touched.jobRole ? ' is-invalid' : '')} />
                         <ErrorMessage name="jobRole" component="div" className="invalid-feedback" />
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="BasicSalary">BasicSalary</label>
+                        <label htmlFor="BasicSalary">Basic Salary</label>
                         <Field name="BasicSalary" type="number" className={'form-control' + (errors.BasicSalary && touched.BasicSalary ? ' is-invalid' : '')} />
                         <ErrorMessage name="BasicSalary" component="div" className="invalid-feedback" />
                     </div>
@@ -126,15 +126,18 @@ function CreateNewPositionForm() {
 
                         <label htmlFor="Department">Department</label>
                         <Field component="select" name="Department" class="form-control">
-                            <option value="Management" class="dropdown-item" >Management</option>
+                            <option value="Human Resource Department" class="dropdown-item" >Human Resource Department</option>
+                            <option value="Sales Department" class="dropdown-item" >Sales Department</option>
                             <option value="Baking Department" class="dropdown-item">Bakery</option>
-                            <option value="Event Management">Event Management</option>
+                            <option value="Event Management Department">Event Management Department</option>
+                            <option value="Photography Department">Photography Department</option>
+                            <option value = "Cards Department">Cards Department</option>
                         </Field>
                         <ErrorMessage name="Department" component="div" className="invalid-feedback" />
 
                     </div>
                     <div className="form-group">
-                        <label htmlFor="OTRate">OTRate</label>
+                        <label htmlFor="OTRate">Over Time Rate (Per Hour)</label>
                         <Field name="OTRate" type="text" className={'form-control' + (errors.OTRate && touched.OTRate ? ' is-invalid' : '')} />
                         <ErrorMessage name="OTRate" component="div" className="invalid-feedback" />
                     </div>
@@ -150,7 +153,8 @@ function CreateNewPositionForm() {
             )}
 
         />
-
+        
+        </>
     )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Card as Card_S, Container , Grid } from '@material-ui/core';
@@ -18,9 +18,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-
-import CardTemplateSummary from '../Forms/UpdateCardTemplateForm'
-import UpdateCardTemplateForm from '../Forms/UpdateCardTemplateForm';
 import { gql, HttpLink, InMemoryCache, ApolloClient } from 'apollo-boost';
 
 const useStyles = makeStyles({
@@ -34,22 +31,12 @@ const useStyles = makeStyles({
 });
 
 
-
-function Card({ cardName, category, price, size , cardId , searchTags}) {
+function CakeItem({CakeItemID,CakeItemName,Category,Price,SoldItems}) {
 
     const classes = useStyles();
 
-    const [openUpload, setOpenUpload] = React.useState(false);
-
-    function handleClickOpenUpload() {
-        setOpenUpload(true);
-    }
-
-    function handleCloseUpload() {
-        setOpenUpload(false);
-    }
-
     const [openDelete, setOpenDelete] = React.useState(false);
+    
 
     function handleClickOpenDelete() {
         setOpenDelete(true);
@@ -59,63 +46,64 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
         setOpenDelete(false);
     }
 
-    function handleCardDelete()
+    function handleCakeItemDelete()
     {
-        const DELETE_CARD_TEMPLATE = gql `
-        
-        mutation DeleteCardTemplate
-        (
-            $CardId : ID!
-        ) 
-        {
-            deleteCardTemplate(where: { CardId: $CardId }) 
+        const DELETE_CAKE_ITEM = gql`
+            mutation DeleteCakeItem
+            (
+                $CakeItemID : ID
+            ) 
             {
-                        CardId
-                        CardName
-                        Category
+            deleteCakeItem(where: { CakeItemID: $CakeItemID }) 
+            {
+            CakeItemID
             }
-                    }
+                }
         `
-            const cache = new InMemoryCache();
-            const link = new HttpLink({
+        //Creating Client
+        const cache = new InMemoryCache();
+        const link = new HttpLink({
             uri: 'https://nuhaprismadb-e9e96b51e5.herokuapp.com/nuha-graphql/dev',
-            })
-            const client = new ApolloClient({
-                cache,
-                link,
-                connectToDevTools: true
-            })
-            
+        })
+        const client = new ApolloClient({
+            cache,
+            link,
+            connectToDevTools: true
+        })
+
         client.mutate(
             {
-                mutation : DELETE_CARD_TEMPLATE,
-                variables :
+                mutation : DELETE_CAKE_ITEM,
+                variables : 
                 {
-                        CardId : cardId
+                    CakeItemID : CakeItemID
                 }
             }
-        ).then(
+        ).then
+        (
             (data) =>
             {
-                alert("Card Delete Successfully")
-                setOpenDelete(false)
+                console.log(data)
+                alert("Item Deleted ")
+                handleCloseDelete(true)
             }
-        ).catch(
-            (err) => 
+        ).catch
+        (
+            (err) =>
             {
-                alert("Card Delete unSuccessfull")
                 console.log(err)
+                alert("Item Delete Unsuccessfull")
+
             }
-            
-        )    
-            
+        )
+
     }
 
     return (
         <>
             <Grid item >
                 <Grid item xs = "4">
-                    <S3ImgView imageName = {cardId}  height = "450px" width = "400px"/>
+                    <S3ImgView imageName = {CakeItemID}  height = "450px" width = "400px"/>
                 </Grid>
                 <Grid item xs = "8">
 
@@ -125,32 +113,30 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
                         <CardActionArea>
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        {cardName}
+                                        {CakeItemName}
                                     </Typography>
                                     <Typography variant="body2" color="textPrimary" component="p">
                                         Category
                                 </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {category}
+                                        {Category}
                                     </Typography>
                                     <Typography variant="body2" color="textPrimary" component="p">
                                         Price in LKR
                                 </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {price}
+                                        {Price}
                                     </Typography>
                                     <Typography variant="body2" color="textPrimary" component="p">
-                                        Size
+                                        Sold Items
                                 </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {size}
+                                        {SoldItems}
                                     </Typography>   
                                 </CardContent>
                             </CardActionArea>
                     <CardActions>
-                    <Button size="small" color="primary" fullWidth onClick={handleClickOpenUpload}>
-                        Update
-                    </Button>
+                    
                     <Button size="small" color="secondary" fullWidth  onClick={handleClickOpenDelete} >
                         Delete
                     </Button>
@@ -162,34 +148,6 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
                 </Grid>
             </Grid>
             
-               
-                        
-            
-
-            <div>
-                <Dialog open={openUpload} onClose={handleCloseUpload} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Update Card Template</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Edit CardTemplate of {cardName}
-                        </DialogContentText>
-                        <UpdateCardTemplateForm 
-                            cardName = {cardName} 
-                            category = {category} 
-                            price = {price} 
-                            size  = {size}
-                            cardId = {cardId}
-                            searchTags = {searchTags}
-                            />
-                    </DialogContent>
-                    <DialogActions>
-                        
-                        <Button onClick={handleCloseUpload} color="primary">
-                            Cancel
-                    </Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
 
             <div>
             <Dialog open={openDelete} onClose={handleCloseDelete} aria-labelledby="form-dialog-title">
@@ -201,7 +159,7 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
                 
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={handleCardDelete} color="primary">
+                <Button onClick={handleCakeItemDelete} color="primary">
                     Yes I am Sure
                 </Button>
                 <Button onClick={handleCloseDelete} color="primary">
@@ -216,4 +174,4 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
     )
 }
 
-export default Card
+export default CakeItem

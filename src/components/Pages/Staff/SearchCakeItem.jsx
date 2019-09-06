@@ -1,10 +1,8 @@
 import React from 'react'
 import {useState} from 'react'
 import {Container, Grid , Typography , TextField , Button} from '@material-ui/core'
-
-import Cards from '../../../components/SpecialComponents/Cards'
-
-function StaffSearchCard() {
+import CakeItems from '../../SpecialComponents/CakeItems'
+function SearchCakeItem() {
 
     const [searchText, setSearchText] = React.useState('');
     
@@ -22,7 +20,7 @@ function StaffSearchCard() {
             <Grid   container >
                 <Grid item xs = "12">
                     <Typography variant = "h2">
-                        Search Cake Item
+                        Cake Item Search
                     </Typography>
                 </Grid>
                 <Grid item xs = "12">
@@ -34,7 +32,7 @@ function StaffSearchCard() {
                     variant="outlined"
                     fullWidth
                 />
-                <Button fullWidth>Search</Button>
+                <Button fullWidth>Search Button</Button>
                 </Grid>
                 <Grid item xs = "12">
                     <Typography variant = "h5">
@@ -47,11 +45,11 @@ function StaffSearchCard() {
             <br/>
             <Grid container style={{ backgroundColor: '#fffff', height: '80vh' }}  >
                    
-                   
+                   <CakeItems searchValue = {searchText}/>
                         
             </Grid>
         </Container>
     )
 }
 
-export default StaffSearchCard
+export default SearchCakeItem

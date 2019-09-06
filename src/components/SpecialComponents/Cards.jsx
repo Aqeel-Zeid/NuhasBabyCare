@@ -8,7 +8,7 @@ export default function Cards(props) {
 
     const [cardArray, setCardArray] = useState([]);
     useEffect(() => {
-        const cache = new InMemoryCache();
+    const cache = new InMemoryCache();
     const link = new HttpLink({
         uri: 'https://nuhaprismadb-e9e96b51e5.herokuapp.com/nuha-graphql/dev',
     })

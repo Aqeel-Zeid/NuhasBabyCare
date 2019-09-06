@@ -20,7 +20,7 @@ const s3 = new AWS.S3()
 
     const url = s3.getSignedUrl('putObject', {
         Bucket: 'nuhatestbucket2563',
-        Key: 'TestImage.jpg',
+        Key: 'TestImage.jpg',   
         Expires: signedUrlExpireSeconds,
         
     }, (err,iurl) => {
@@ -93,8 +93,8 @@ const S3imageUploader = (props) => {
            
             <Container>
                     <DropZone/>
-                    <Button variant="contained" className={classes.button} onClick = {uploadFileToS3}>
-                    Upload
+                    <Button variant="outlined" className={classes.button} onClick = {uploadFileToS3} fullWidth= {true}>
+                         Upload
                     </Button>
             </Container>
           </>

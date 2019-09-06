@@ -40,7 +40,7 @@ const MyAppBar = () => {
     const classes = useStyles();
 
 
-    const [auth, setAuth] = React.useState(true);
+    const [auth, setAuth] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -54,37 +54,18 @@ const MyAppBar = () => {
       }
 
     return (
-        <div >
+        <div>
             <AppBar position="static" color="default" className={classes.root}>
                 <Toolbar >
                     
                     <SideDrawer/>
                     
-                    
-                    
-                   
                         <img src={NuhaTypography} className={classes.title} height= "50vh" width = "40vw" /> 
                     
 
                     {auth && (
                         <div >
 
-                            <IconButton aria-label="show 17 new notifications" color="inherit">
-                                <Badge badgeContent={19} color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-
-                            <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                                alignSelf="flex-End"
-                            >
-                                <AccountCircle />
-                            </IconButton>
                             
                             <Menu
                                 id="menu-appbar"

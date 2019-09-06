@@ -1,28 +1,25 @@
 import React from 'react'
-import {useState} from 'react'
 import {Container, Grid , Typography , TextField , Button} from '@material-ui/core'
+import PhotoFrames from '../../SpecialComponents/PhotoFrames'
 
-import Cards from '../../../components/SpecialComponents/Cards'
-
-function StaffSearchCard() {
+function SearchPhotoFrame() {
 
     const [searchText, setSearchText] = React.useState('');
-    
-    
-      const handleChange = name => event => {
-          if(event.target.value.length >= 3)
-          {
-            setSearchText(event.target.value)
-          }
-        
-      };
+
+    const handleChange = name => event => {
+        if(event.target.value.length >= 3)
+        {
+          setSearchText(event.target.value)
+        }
+      
+    };
 
     return (
-        <Container >
-            <Grid   container >
-                <Grid item xs = "12">
+        <Container>
+            <Grid container>
+            <Grid item xs = "12">
                     <Typography variant = "h2">
-                        Search Cake Item
+                        Photo Frame Template Search
                     </Typography>
                 </Grid>
                 <Grid item xs = "12">
@@ -34,24 +31,19 @@ function StaffSearchCard() {
                     variant="outlined"
                     fullWidth
                 />
-                <Button fullWidth>Search</Button>
+                <Button fullWidth>Search Button</Button>
                 </Grid>
                 <Grid item xs = "12">
                     <Typography variant = "h5">
-                        {`You Searched for '${searchText}'`}
+                        {`You Searched for Photo Frame '${searchText}'`}
                     </Typography>
-                    
                 </Grid>
-                
-            </Grid>
-            <br/>
-            <Grid container style={{ backgroundColor: '#fffff', height: '80vh' }}  >
-                   
-                   
-                        
+                <Grid items xs = "12">
+                    <PhotoFrames searchValue = {searchText} />
+                </Grid>
             </Grid>
         </Container>
     )
 }
 
-export default StaffSearchCard
+export default SearchPhotoFrame
