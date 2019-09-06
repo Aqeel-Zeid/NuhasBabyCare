@@ -121,10 +121,10 @@ export default function CreateCardTemplateForm(props) {
                          
                             <option value="BirthDay" class="dropdown-item" >Birth Day</option>
                             <option value="MothersDay" class="dropdown-item">Mothers Day</option>
-                            <option value="FathersDay">Fathers Day</option>
-                            <option value="BornDay">Born Day</option>
-                            <option value="NamingDay">Naming Day</option>
-                    </Field>
+                            <option value="FathersDay" class="dropdown-item">Fathers Day</option>
+                            <option value="BornDay" class="dropdown-item">Born Day</option>
+                            <option value="NamingDay" class="dropdown-item">Naming Day</option>
+                        </Field>
                     </div>
 
                     <div className="form-group">

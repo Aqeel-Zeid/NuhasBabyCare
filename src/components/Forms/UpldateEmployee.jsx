@@ -6,31 +6,14 @@ import {Container} from  '@material-ui/core'
 import { gql, HttpLink, InMemoryCache, ApolloClient } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
-function CreateEmployeeForm() {
-
-    let p  = []
-    const GET_POSITIONS = gql`
-        query Positions
-        (
-            $name : String
-        )
-        {
-                positions(
-                    where:{
-                        department:{
-                        name :$name
-                        }
-                    })
-                {
-                    jobRole
-                }
-        }
-    `
+function UpldateEmployee(props) {
 
     const [positions , setPositions] = useState([])
     const [departments , setDepartments] = useState('Management')
     const [selectedDepartment , setSelectedDepartment] = useState('Branch Manager')
-    
+
+    console.log(props.data.employeeID)
+
     const handleChangeDepartment = (event) => 
     {
         console.log(event.target.value)
@@ -41,7 +24,7 @@ function CreateEmployeeForm() {
     {
         setSelectedDepartment(event.target.value)
     }
-    
+
     useEffect(
         () => 
         {
@@ -83,34 +66,50 @@ function CreateEmployeeForm() {
         },
         [departments]
     )
-    
-    
+
+
+    const GET_POSITIONS = gql`
+        query Positions
+        (
+            $name : String
+        )
+        {
+                positions(
+                    where:{
+                        department:{
+                        name :$name
+                        }
+                    })
+                {
+                    jobRole
+                }
+        }
+    `
+
     return (
         <Container>
             <Formik
             initialValues = {{
-                EmployeeName : '',
-                Age : '',
-                NicNumber : '',
-                BankAccountNumber : '',
-                Position : 'Human Resource Manager',
-                Department  : 'Human Resource Department',
-                Address : '',
-                PhoneNumber : '',
-                WorkEmail : '',
-                Password : '',
-
-
+                EmployeeName : props.data.employeeName,
+                Age : props.data.age,
+                NicNumber : props.data.nicNumber,
+                BankAccountNumber : props.data.bankAccountNumber,
+                Position : props.jobRole,
+                Department  : 'Management',
+                Address : props.data.address,
+                PhoneNumber : props.data.phoneNumber,
+                WorkEmail : props.workEmail,
+                Password : props.password,
             }}
             validationSchema = { Yup.object().shape({
-                    
+
             })}
             onSubmit = {(fields) => 
                 {
                     console.log(fields)
                     console.log(departments , selectedDepartment)
 
-
+                    console.log('Employee id' , props.data.data)
                     const cache = new InMemoryCache();
                     const link = new HttpLink({
                     uri: 'https://nuhaprismadb-e9e96b51e5.herokuapp.com/nuha-graphql/dev',
@@ -121,9 +120,10 @@ function CreateEmployeeForm() {
                         connectToDevTools: true
                     })
 
-                    const CREATE_STAFF = gql`
-                        mutation  CreateStaff
-                        (
+                    const UPDATE_EMPLOYEE = gql`
+                    mutation UpdateEmployee
+                    (
+                            $employeeID : ID
                             $employeeName : String
                             $nicNumber : String
                             $bankAccountNumber : String
@@ -132,67 +132,72 @@ function CreateEmployeeForm() {
                             $workEmail : String
                             $password : String
                             $jobRole : String
-                            $age : Int
-                        ) 
-                        {
-                            createStaff(
-                                data: {
-                                employeeName: $employeeName
-                                nicNumber: $nicNumber
-                                bankAccountNumber: $bankAccountNumber
-                                address: $address
-                                phoneNumber: $phoneNumber
-                                workEmail: $workEmail
-                                password: $password
-                                Age : $age
-                                position: { connect: { jobRole: $jobRole } }
-                                }
-                            ) {
-                                employeeID
-                                Age
-                                employeeName
-                                nicNumber
-                                bankAccountNumber
-                                position {
-                                jobRole
-                                department {
-                                    name
-                                }
-                                }
-                                address
-                                phoneNumber
-                                workEmail
-                                password
-                            }
-                            }
-                    `
-
-                    client.mutate(
-                        {
-                            mutation: CREATE_STAFF,
-                            variables: {
-                                employeeName : fields.EmployeeName,
-                                nicNumber : fields.NicNumber ,
-                                age : fields.Age,
-                                bankAccountNumber : fields.BankAccountNumber,
-                                phoneNumber : fields.PhoneNumber , 
-                                address : fields.Address,
-                                workEmail : fields.WorkEmail,
-                                password : fields.Password,
-                                jobRole : selectedDepartment
-                            }
-                        }
-                    ).then(
-                        (data) =>
-                        {
-                            console.log(data)
-                            alert('Employee Registered Successfully')
-                        }
-                    ).catch(
-                        (err) => {console.log(err)}
                     )
-
+                        {
+                        updateStaff
+                        (
+                            where:
+                            {
+                            employeeID : $employeeID
+                            }
+                            data:
+                            {
+                            employeeName : $employeeName
+                            nicNumber : $nicNumber
+                            bankAccountNumber : $bankAccountNumber
+                            address : $address
+                            phoneNumber : $phoneNumber
+                            workEmail : $workEmail
+                            password : $password
+                            position : {
+                                connect : {
+                                jobRole : $jobRole
+                                }
+                            }
+                            
+                            }
+                        )
+                        {
+                            employeeName
+                            nicNumber
+                            bankAccountNumber
+                            position{
+                            jobRole
+                            }
+                            workEmail
+                            address
+                            password
+                        }
+                        }
+                    `
+                
+                client.mutate(
+                    {
+                        mutation : UPDATE_EMPLOYEE,
+                        variables : 
+                        {
+                            employeeName : fields.EmployeeName,
+                            nicNumber : fields.NicNumber ,
+                            age : fields.Age,
+                            bankAccountNumber : fields.BankAccountNumber,
+                            phoneNumber : fields.PhoneNumber , 
+                            address : fields.Address,
+                            workEmail : fields.WorkEmail,
+                            password : fields.Password,
+                            jobRole : selectedDepartment,
+                            employeeID : props.data.employeeID
+                        } 
+                    } 
+                ).then(
+                    (data) => {
+                        console.log(data)
+                        alert("Update Successfull")
+                    }
+                ).catch((err) => {console.log(err)})
+                    
                 }
+
+                
                 
             }
             render = {({errors, status , touched , values}) =>
@@ -202,12 +207,9 @@ function CreateEmployeeForm() {
                     <div className="form-group">
                         <label htmlFor="Department">Department</label>
                         <Field component="select" name="Department" class="form-control" onChange = {handleChangeDepartment} value = {departments}>
-                        <option value="Human Resource Department" class="dropdown-item" >Human Resource Department</option>
-                            <option value="Sales Department" class="dropdown-item" >Sales Department</option>
-                            <option value="Baking Department" class="dropdown-item">Bakery</option>
-                            <option value="Event Management Department">Event Management Department</option>
-                            <option value="Photography Department">Photography Department</option>
-                            <option value = "Cards Department">Cards Department</option>
+                            <option value="Management" class="dropdown-item" >Management</option>
+                            <option value="Baking Department" class="dropdown-item" >Bakery</option>
+                            <option value = "Event Management"  class="dropdown-item">Event Management</option>
                         </Field>
                     </div>
 
@@ -291,4 +293,4 @@ function CreateEmployeeForm() {
     )
 }
 
-export default CreateEmployeeForm
+export default UpldateEmployee

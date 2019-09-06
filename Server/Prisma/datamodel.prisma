@@ -44,3 +44,61 @@ type CardTemplate {
   Material : String
   SearchTags : String
 }
+
+type PhotoFrameTemplate {
+  FrameID : ID! @id
+  FrameName : String @unique
+  FrameMaterial : String
+  PhotoFinish : String
+  Price : Int
+  Dimensions : String
+}
+
+type Item {
+
+  ItemId : ID! @id
+  ItemName : String @unique
+  Category : String 
+  Price : Int
+  Stock : Int
+  Brand : String
+  
+}
+
+type LeaveDay {
+
+  LeaveID : ID! @id
+  StaffMember : Staff!
+  Day : Int
+  Month : Int
+  Year : Int
+  
+}
+
+type EventPackage {
+  PackageID : ID! @id
+  PackageName : String
+  BookingCost : Int
+  FoodPackage : String
+  PhotographyServices : String 
+  Sounds : String
+}
+
+type Customer {
+  CustomerID : ID! @id,
+  CustomerName : String,
+  Address : String,
+  Gender : String,
+  Phone : Int, @unique
+  CustomerEmail : String @unique
+  Ethnicity : String
+  LoyalityPoints : Float
+}
+
+type CakeItem {
+  CakeItemID : ID! @id,
+  CakeItemName : String @unique,
+  Price : Int
+  Category : String
+  SoldItems : Int
+}

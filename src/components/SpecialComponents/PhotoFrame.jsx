@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Card as Card_S, Container , Grid } from '@material-ui/core';
@@ -8,8 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import S3ImgView from "../ImageUploaders/S3ImgViewer";
-
-
+import { gql, HttpLink, InMemoryCache, ApolloClient } from 'apollo-boost';
 
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -18,10 +18,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-
-import CardTemplateSummary from '../Forms/UpdateCardTemplateForm'
-import UpdateCardTemplateForm from '../Forms/UpdateCardTemplateForm';
-import { gql, HttpLink, InMemoryCache, ApolloClient } from 'apollo-boost';
+import '../Forms/UpdateFrame'
+import UpdateFrame from '../Forms/UpdateFrame';
 
 const useStyles = makeStyles({
     card: {
@@ -34,8 +32,7 @@ const useStyles = makeStyles({
 });
 
 
-
-function Card({ cardName, category, price, size , cardId , searchTags}) {
+function PhotoFrame(props) {
 
     const classes = useStyles();
 
@@ -59,95 +56,116 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
         setOpenDelete(false);
     }
 
-    function handleCardDelete()
+    function handleFrameDelete()
     {
-        const DELETE_CARD_TEMPLATE = gql `
         
-        mutation DeleteCardTemplate
-        (
-            $CardId : ID!
-        ) 
-        {
-            deleteCardTemplate(where: { CardId: $CardId }) 
-            {
-                        CardId
-                        CardName
-                        Category
-            }
+
+        const DELETE_FRAME = gql`
+                    mutation DeletePhotoFrameTemplate
+                    (
+                        $FrameID : ID
+                    )
+                    {
+                    deletePhotoFrameTemplate(where:
+                        {
+                        FrameID : $FrameID
+                        })
+                    {
+                        FrameID
+                        FrameName
+                        FrameMaterial
+                        PhotoFinish
+                        Price
+                    }
                     }
         `
-            const cache = new InMemoryCache();
-            const link = new HttpLink({
-            uri: 'https://nuhaprismadb-e9e96b51e5.herokuapp.com/nuha-graphql/dev',
-            })
-            const client = new ApolloClient({
-                cache,
-                link,
-                connectToDevTools: true
-            })
-            
+        const cache = new InMemoryCache();
+        const link = new HttpLink({
+        uri: 'https://nuhaprismadb-e9e96b51e5.herokuapp.com/nuha-graphql/dev',
+        })
+        const client = new ApolloClient({
+            cache,
+            link,
+            connectToDevTools: true
+        })
+
         client.mutate(
             {
-                mutation : DELETE_CARD_TEMPLATE,
+                mutation : DELETE_FRAME,
                 variables :
                 {
-                        CardId : cardId
+                        FrameID : props.FrameID
                 }
             }
         ).then(
             (data) =>
             {
-                alert("Card Delete Successfully")
+                alert("Frame Delete Successfully")
                 setOpenDelete(false)
             }
         ).catch(
             (err) => 
             {
-                alert("Card Delete unSuccessfull")
+                alert("Frame Delete unSuccessfull")
                 console.log(err)
             }
             
         )    
+                  
+
             
+
     }
 
     return (
         <>
             <Grid item >
                 <Grid item xs = "4">
-                    <S3ImgView imageName = {cardId}  height = "450px" width = "400px"/>
+                    
                 </Grid>
                 <Grid item xs = "8">
-
+                    <S3ImgView imageName = {props.FrameID} height = "450" width = "400"/>
                 </Grid>
                 <Grid item xs = "12">
                     <Card_S className={classes.card}>
                         <CardActionArea>
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        {cardName}
+                                        
                                     </Typography>
                                     <Typography variant="body2" color="textPrimary" component="p">
-                                        Category
+                                        Frame Name
                                 </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {category}
+                                        { `${props.FrameName}` }
                                     </Typography>
                                     <Typography variant="body2" color="textPrimary" component="p">
-                                        Price in LKR
+                                        Dimensions
                                 </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {price}
+                                        { `${props.Dimensions}` }
                                     </Typography>
                                     <Typography variant="body2" color="textPrimary" component="p">
-                                        Size
-                                </Typography>
+                                        Frame Material
+                                    </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {size}
+                                        { `${props.FrameMaterial}` }
                                     </Typography>   
+                                    <Typography variant="body2" color="textPrimary" component="p">
+                                        Price
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        { `${props.Price}` }
+                                    </Typography> 
+                                    <Typography variant="body2" color="textPrimary" component="p">
+                                        Photo Finish
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        { `${props.PhotoFinish}` }
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                    <CardActions>
+                <CardActions>
                     <Button size="small" color="primary" fullWidth onClick={handleClickOpenUpload}>
                         Update
                     </Button>
@@ -161,25 +179,20 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
 
                 </Grid>
             </Grid>
-            
-               
-                        
-            
-
             <div>
                 <Dialog open={openUpload} onClose={handleCloseUpload} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Update Card Template</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Update Frame Template</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Edit CardTemplate of {cardName}
+                            Edit FrameTemplate of 
                         </DialogContentText>
-                        <UpdateCardTemplateForm 
-                            cardName = {cardName} 
-                            category = {category} 
-                            price = {price} 
-                            size  = {size}
-                            cardId = {cardId}
-                            searchTags = {searchTags}
+                            <UpdateFrame 
+                                FrameID = {props.FrameID}
+                                FrameName = {props.FrameName}
+                                Dimensions = {props.Dimensions}
+                                FrameMaterial = {props.FrameMaterial}
+                                Price = {props.Price}
+                                PhotoFinish = {props.PhotoFinish}
                             />
                     </DialogContent>
                     <DialogActions>
@@ -189,19 +202,19 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
                     </Button>
                     </DialogActions>
                 </Dialog>
-            </div>
+            </div> 
 
             <div>
             <Dialog open={openDelete} onClose={handleCloseDelete} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Card Delete</DialogTitle>
+                <DialogTitle id="form-dialog-title">Delete</DialogTitle>
                 <DialogContent>
                 <DialogContentText>
-                    Are you Sure You want delete This Card Template
+                    Are you Sure You want delete This Frame Template
                 </DialogContentText>
                 
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={handleCardDelete} color="primary">
+                <Button onClick={handleFrameDelete} color="primary">
                     Yes I am Sure
                 </Button>
                 <Button onClick={handleCloseDelete} color="primary">
@@ -212,8 +225,7 @@ function Card({ cardName, category, price, size , cardId , searchTags}) {
             </div>
 
         </>
-
     )
 }
 
-export default Card
+export default PhotoFrame

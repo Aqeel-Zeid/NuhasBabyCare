@@ -3,7 +3,15 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateCardTemplate {
+/* GraphQL */ `type AggregateCakeItem {
+  count: Int!
+}
+
+type AggregateCardTemplate {
+  count: Int!
+}
+
+type AggregateCustomer {
   count: Int!
 }
 
@@ -11,11 +19,27 @@ type AggregateDepartment {
   count: Int!
 }
 
+type AggregateEventPackage {
+  count: Int!
+}
+
+type AggregateItem {
+  count: Int!
+}
+
+type AggregateLeaveDay {
+  count: Int!
+}
+
+type AggregatePhotoFrameTemplate {
+  count: Int!
+}
+
 type AggregatePosition {
   count: Int!
 }
 
-type AggregateStaffMember {
+type AggregateStaff {
   count: Int!
 }
 
@@ -25,6 +49,155 @@ type AggregateUser {
 
 type BatchPayload {
   count: Long!
+}
+
+type CakeItem {
+  CakeItemID: ID!
+  CakeItemName: String
+  Price: Int
+  Category: String
+  SoldItems: Int
+}
+
+type CakeItemConnection {
+  pageInfo: PageInfo!
+  edges: [CakeItemEdge]!
+  aggregate: AggregateCakeItem!
+}
+
+input CakeItemCreateInput {
+  CakeItemID: ID
+  CakeItemName: String
+  Price: Int
+  Category: String
+  SoldItems: Int
+}
+
+type CakeItemEdge {
+  node: CakeItem!
+  cursor: String!
+}
+
+enum CakeItemOrderByInput {
+  CakeItemID_ASC
+  CakeItemID_DESC
+  CakeItemName_ASC
+  CakeItemName_DESC
+  Price_ASC
+  Price_DESC
+  Category_ASC
+  Category_DESC
+  SoldItems_ASC
+  SoldItems_DESC
+}
+
+type CakeItemPreviousValues {
+  CakeItemID: ID!
+  CakeItemName: String
+  Price: Int
+  Category: String
+  SoldItems: Int
+}
+
+type CakeItemSubscriptionPayload {
+  mutation: MutationType!
+  node: CakeItem
+  updatedFields: [String!]
+  previousValues: CakeItemPreviousValues
+}
+
+input CakeItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CakeItemWhereInput
+  AND: [CakeItemSubscriptionWhereInput!]
+  OR: [CakeItemSubscriptionWhereInput!]
+  NOT: [CakeItemSubscriptionWhereInput!]
+}
+
+input CakeItemUpdateInput {
+  CakeItemName: String
+  Price: Int
+  Category: String
+  SoldItems: Int
+}
+
+input CakeItemUpdateManyMutationInput {
+  CakeItemName: String
+  Price: Int
+  Category: String
+  SoldItems: Int
+}
+
+input CakeItemWhereInput {
+  CakeItemID: ID
+  CakeItemID_not: ID
+  CakeItemID_in: [ID!]
+  CakeItemID_not_in: [ID!]
+  CakeItemID_lt: ID
+  CakeItemID_lte: ID
+  CakeItemID_gt: ID
+  CakeItemID_gte: ID
+  CakeItemID_contains: ID
+  CakeItemID_not_contains: ID
+  CakeItemID_starts_with: ID
+  CakeItemID_not_starts_with: ID
+  CakeItemID_ends_with: ID
+  CakeItemID_not_ends_with: ID
+  CakeItemName: String
+  CakeItemName_not: String
+  CakeItemName_in: [String!]
+  CakeItemName_not_in: [String!]
+  CakeItemName_lt: String
+  CakeItemName_lte: String
+  CakeItemName_gt: String
+  CakeItemName_gte: String
+  CakeItemName_contains: String
+  CakeItemName_not_contains: String
+  CakeItemName_starts_with: String
+  CakeItemName_not_starts_with: String
+  CakeItemName_ends_with: String
+  CakeItemName_not_ends_with: String
+  Price: Int
+  Price_not: Int
+  Price_in: [Int!]
+  Price_not_in: [Int!]
+  Price_lt: Int
+  Price_lte: Int
+  Price_gt: Int
+  Price_gte: Int
+  Category: String
+  Category_not: String
+  Category_in: [String!]
+  Category_not_in: [String!]
+  Category_lt: String
+  Category_lte: String
+  Category_gt: String
+  Category_gte: String
+  Category_contains: String
+  Category_not_contains: String
+  Category_starts_with: String
+  Category_not_starts_with: String
+  Category_ends_with: String
+  Category_not_ends_with: String
+  SoldItems: Int
+  SoldItems_not: Int
+  SoldItems_in: [Int!]
+  SoldItems_not_in: [Int!]
+  SoldItems_lt: Int
+  SoldItems_lte: Int
+  SoldItems_gt: Int
+  SoldItems_gte: Int
+  AND: [CakeItemWhereInput!]
+  OR: [CakeItemWhereInput!]
+  NOT: [CakeItemWhereInput!]
+}
+
+input CakeItemWhereUniqueInput {
+  CakeItemID: ID
+  CakeItemName: String
 }
 
 type CardTemplate {
@@ -224,6 +397,219 @@ input CardTemplateWhereUniqueInput {
   CardName: String
 }
 
+type Customer {
+  CustomerID: ID!
+  CustomerName: String
+  Address: String
+  Gender: String
+  Phone: Int
+  CustomerEmail: String
+  Ethnicity: String
+  LoyalityPoints: Float
+}
+
+type CustomerConnection {
+  pageInfo: PageInfo!
+  edges: [CustomerEdge]!
+  aggregate: AggregateCustomer!
+}
+
+input CustomerCreateInput {
+  CustomerID: ID
+  CustomerName: String
+  Address: String
+  Gender: String
+  Phone: Int
+  CustomerEmail: String
+  Ethnicity: String
+  LoyalityPoints: Float
+}
+
+type CustomerEdge {
+  node: Customer!
+  cursor: String!
+}
+
+enum CustomerOrderByInput {
+  CustomerID_ASC
+  CustomerID_DESC
+  CustomerName_ASC
+  CustomerName_DESC
+  Address_ASC
+  Address_DESC
+  Gender_ASC
+  Gender_DESC
+  Phone_ASC
+  Phone_DESC
+  CustomerEmail_ASC
+  CustomerEmail_DESC
+  Ethnicity_ASC
+  Ethnicity_DESC
+  LoyalityPoints_ASC
+  LoyalityPoints_DESC
+}
+
+type CustomerPreviousValues {
+  CustomerID: ID!
+  CustomerName: String
+  Address: String
+  Gender: String
+  Phone: Int
+  CustomerEmail: String
+  Ethnicity: String
+  LoyalityPoints: Float
+}
+
+type CustomerSubscriptionPayload {
+  mutation: MutationType!
+  node: Customer
+  updatedFields: [String!]
+  previousValues: CustomerPreviousValues
+}
+
+input CustomerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CustomerWhereInput
+  AND: [CustomerSubscriptionWhereInput!]
+  OR: [CustomerSubscriptionWhereInput!]
+  NOT: [CustomerSubscriptionWhereInput!]
+}
+
+input CustomerUpdateInput {
+  CustomerName: String
+  Address: String
+  Gender: String
+  Phone: Int
+  CustomerEmail: String
+  Ethnicity: String
+  LoyalityPoints: Float
+}
+
+input CustomerUpdateManyMutationInput {
+  CustomerName: String
+  Address: String
+  Gender: String
+  Phone: Int
+  CustomerEmail: String
+  Ethnicity: String
+  LoyalityPoints: Float
+}
+
+input CustomerWhereInput {
+  CustomerID: ID
+  CustomerID_not: ID
+  CustomerID_in: [ID!]
+  CustomerID_not_in: [ID!]
+  CustomerID_lt: ID
+  CustomerID_lte: ID
+  CustomerID_gt: ID
+  CustomerID_gte: ID
+  CustomerID_contains: ID
+  CustomerID_not_contains: ID
+  CustomerID_starts_with: ID
+  CustomerID_not_starts_with: ID
+  CustomerID_ends_with: ID
+  CustomerID_not_ends_with: ID
+  CustomerName: String
+  CustomerName_not: String
+  CustomerName_in: [String!]
+  CustomerName_not_in: [String!]
+  CustomerName_lt: String
+  CustomerName_lte: String
+  CustomerName_gt: String
+  CustomerName_gte: String
+  CustomerName_contains: String
+  CustomerName_not_contains: String
+  CustomerName_starts_with: String
+  CustomerName_not_starts_with: String
+  CustomerName_ends_with: String
+  CustomerName_not_ends_with: String
+  Address: String
+  Address_not: String
+  Address_in: [String!]
+  Address_not_in: [String!]
+  Address_lt: String
+  Address_lte: String
+  Address_gt: String
+  Address_gte: String
+  Address_contains: String
+  Address_not_contains: String
+  Address_starts_with: String
+  Address_not_starts_with: String
+  Address_ends_with: String
+  Address_not_ends_with: String
+  Gender: String
+  Gender_not: String
+  Gender_in: [String!]
+  Gender_not_in: [String!]
+  Gender_lt: String
+  Gender_lte: String
+  Gender_gt: String
+  Gender_gte: String
+  Gender_contains: String
+  Gender_not_contains: String
+  Gender_starts_with: String
+  Gender_not_starts_with: String
+  Gender_ends_with: String
+  Gender_not_ends_with: String
+  Phone: Int
+  Phone_not: Int
+  Phone_in: [Int!]
+  Phone_not_in: [Int!]
+  Phone_lt: Int
+  Phone_lte: Int
+  Phone_gt: Int
+  Phone_gte: Int
+  CustomerEmail: String
+  CustomerEmail_not: String
+  CustomerEmail_in: [String!]
+  CustomerEmail_not_in: [String!]
+  CustomerEmail_lt: String
+  CustomerEmail_lte: String
+  CustomerEmail_gt: String
+  CustomerEmail_gte: String
+  CustomerEmail_contains: String
+  CustomerEmail_not_contains: String
+  CustomerEmail_starts_with: String
+  CustomerEmail_not_starts_with: String
+  CustomerEmail_ends_with: String
+  CustomerEmail_not_ends_with: String
+  Ethnicity: String
+  Ethnicity_not: String
+  Ethnicity_in: [String!]
+  Ethnicity_not_in: [String!]
+  Ethnicity_lt: String
+  Ethnicity_lte: String
+  Ethnicity_gt: String
+  Ethnicity_gte: String
+  Ethnicity_contains: String
+  Ethnicity_not_contains: String
+  Ethnicity_starts_with: String
+  Ethnicity_not_starts_with: String
+  Ethnicity_ends_with: String
+  Ethnicity_not_ends_with: String
+  LoyalityPoints: Float
+  LoyalityPoints_not: Float
+  LoyalityPoints_in: [Float!]
+  LoyalityPoints_not_in: [Float!]
+  LoyalityPoints_lt: Float
+  LoyalityPoints_lte: Float
+  LoyalityPoints_gt: Float
+  LoyalityPoints_gte: Float
+  AND: [CustomerWhereInput!]
+  OR: [CustomerWhereInput!]
+  NOT: [CustomerWhereInput!]
+}
+
+input CustomerWhereUniqueInput {
+  CustomerID: ID
+  Phone: Int
+  CustomerEmail: String
+}
+
 type Department {
   departmentID: ID!
   name: String!
@@ -343,33 +729,539 @@ input DepartmentWhereUniqueInput {
   name: String
 }
 
+type EventPackage {
+  PackageID: ID!
+  PackageName: String
+  BookingCost: Int
+  FoodPackage: String
+  PhotographyServices: String
+  Sounds: String
+}
+
+type EventPackageConnection {
+  pageInfo: PageInfo!
+  edges: [EventPackageEdge]!
+  aggregate: AggregateEventPackage!
+}
+
+input EventPackageCreateInput {
+  PackageID: ID
+  PackageName: String
+  BookingCost: Int
+  FoodPackage: String
+  PhotographyServices: String
+  Sounds: String
+}
+
+type EventPackageEdge {
+  node: EventPackage!
+  cursor: String!
+}
+
+enum EventPackageOrderByInput {
+  PackageID_ASC
+  PackageID_DESC
+  PackageName_ASC
+  PackageName_DESC
+  BookingCost_ASC
+  BookingCost_DESC
+  FoodPackage_ASC
+  FoodPackage_DESC
+  PhotographyServices_ASC
+  PhotographyServices_DESC
+  Sounds_ASC
+  Sounds_DESC
+}
+
+type EventPackagePreviousValues {
+  PackageID: ID!
+  PackageName: String
+  BookingCost: Int
+  FoodPackage: String
+  PhotographyServices: String
+  Sounds: String
+}
+
+type EventPackageSubscriptionPayload {
+  mutation: MutationType!
+  node: EventPackage
+  updatedFields: [String!]
+  previousValues: EventPackagePreviousValues
+}
+
+input EventPackageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EventPackageWhereInput
+  AND: [EventPackageSubscriptionWhereInput!]
+  OR: [EventPackageSubscriptionWhereInput!]
+  NOT: [EventPackageSubscriptionWhereInput!]
+}
+
+input EventPackageUpdateInput {
+  PackageName: String
+  BookingCost: Int
+  FoodPackage: String
+  PhotographyServices: String
+  Sounds: String
+}
+
+input EventPackageUpdateManyMutationInput {
+  PackageName: String
+  BookingCost: Int
+  FoodPackage: String
+  PhotographyServices: String
+  Sounds: String
+}
+
+input EventPackageWhereInput {
+  PackageID: ID
+  PackageID_not: ID
+  PackageID_in: [ID!]
+  PackageID_not_in: [ID!]
+  PackageID_lt: ID
+  PackageID_lte: ID
+  PackageID_gt: ID
+  PackageID_gte: ID
+  PackageID_contains: ID
+  PackageID_not_contains: ID
+  PackageID_starts_with: ID
+  PackageID_not_starts_with: ID
+  PackageID_ends_with: ID
+  PackageID_not_ends_with: ID
+  PackageName: String
+  PackageName_not: String
+  PackageName_in: [String!]
+  PackageName_not_in: [String!]
+  PackageName_lt: String
+  PackageName_lte: String
+  PackageName_gt: String
+  PackageName_gte: String
+  PackageName_contains: String
+  PackageName_not_contains: String
+  PackageName_starts_with: String
+  PackageName_not_starts_with: String
+  PackageName_ends_with: String
+  PackageName_not_ends_with: String
+  BookingCost: Int
+  BookingCost_not: Int
+  BookingCost_in: [Int!]
+  BookingCost_not_in: [Int!]
+  BookingCost_lt: Int
+  BookingCost_lte: Int
+  BookingCost_gt: Int
+  BookingCost_gte: Int
+  FoodPackage: String
+  FoodPackage_not: String
+  FoodPackage_in: [String!]
+  FoodPackage_not_in: [String!]
+  FoodPackage_lt: String
+  FoodPackage_lte: String
+  FoodPackage_gt: String
+  FoodPackage_gte: String
+  FoodPackage_contains: String
+  FoodPackage_not_contains: String
+  FoodPackage_starts_with: String
+  FoodPackage_not_starts_with: String
+  FoodPackage_ends_with: String
+  FoodPackage_not_ends_with: String
+  PhotographyServices: String
+  PhotographyServices_not: String
+  PhotographyServices_in: [String!]
+  PhotographyServices_not_in: [String!]
+  PhotographyServices_lt: String
+  PhotographyServices_lte: String
+  PhotographyServices_gt: String
+  PhotographyServices_gte: String
+  PhotographyServices_contains: String
+  PhotographyServices_not_contains: String
+  PhotographyServices_starts_with: String
+  PhotographyServices_not_starts_with: String
+  PhotographyServices_ends_with: String
+  PhotographyServices_not_ends_with: String
+  Sounds: String
+  Sounds_not: String
+  Sounds_in: [String!]
+  Sounds_not_in: [String!]
+  Sounds_lt: String
+  Sounds_lte: String
+  Sounds_gt: String
+  Sounds_gte: String
+  Sounds_contains: String
+  Sounds_not_contains: String
+  Sounds_starts_with: String
+  Sounds_not_starts_with: String
+  Sounds_ends_with: String
+  Sounds_not_ends_with: String
+  AND: [EventPackageWhereInput!]
+  OR: [EventPackageWhereInput!]
+  NOT: [EventPackageWhereInput!]
+}
+
+input EventPackageWhereUniqueInput {
+  PackageID: ID
+}
+
+type Item {
+  ItemId: ID!
+  ItemName: String
+  Category: String
+  Price: Int
+  Stock: Int
+  Brand: String
+}
+
+type ItemConnection {
+  pageInfo: PageInfo!
+  edges: [ItemEdge]!
+  aggregate: AggregateItem!
+}
+
+input ItemCreateInput {
+  ItemId: ID
+  ItemName: String
+  Category: String
+  Price: Int
+  Stock: Int
+  Brand: String
+}
+
+type ItemEdge {
+  node: Item!
+  cursor: String!
+}
+
+enum ItemOrderByInput {
+  ItemId_ASC
+  ItemId_DESC
+  ItemName_ASC
+  ItemName_DESC
+  Category_ASC
+  Category_DESC
+  Price_ASC
+  Price_DESC
+  Stock_ASC
+  Stock_DESC
+  Brand_ASC
+  Brand_DESC
+}
+
+type ItemPreviousValues {
+  ItemId: ID!
+  ItemName: String
+  Category: String
+  Price: Int
+  Stock: Int
+  Brand: String
+}
+
+type ItemSubscriptionPayload {
+  mutation: MutationType!
+  node: Item
+  updatedFields: [String!]
+  previousValues: ItemPreviousValues
+}
+
+input ItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ItemWhereInput
+  AND: [ItemSubscriptionWhereInput!]
+  OR: [ItemSubscriptionWhereInput!]
+  NOT: [ItemSubscriptionWhereInput!]
+}
+
+input ItemUpdateInput {
+  ItemName: String
+  Category: String
+  Price: Int
+  Stock: Int
+  Brand: String
+}
+
+input ItemUpdateManyMutationInput {
+  ItemName: String
+  Category: String
+  Price: Int
+  Stock: Int
+  Brand: String
+}
+
+input ItemWhereInput {
+  ItemId: ID
+  ItemId_not: ID
+  ItemId_in: [ID!]
+  ItemId_not_in: [ID!]
+  ItemId_lt: ID
+  ItemId_lte: ID
+  ItemId_gt: ID
+  ItemId_gte: ID
+  ItemId_contains: ID
+  ItemId_not_contains: ID
+  ItemId_starts_with: ID
+  ItemId_not_starts_with: ID
+  ItemId_ends_with: ID
+  ItemId_not_ends_with: ID
+  ItemName: String
+  ItemName_not: String
+  ItemName_in: [String!]
+  ItemName_not_in: [String!]
+  ItemName_lt: String
+  ItemName_lte: String
+  ItemName_gt: String
+  ItemName_gte: String
+  ItemName_contains: String
+  ItemName_not_contains: String
+  ItemName_starts_with: String
+  ItemName_not_starts_with: String
+  ItemName_ends_with: String
+  ItemName_not_ends_with: String
+  Category: String
+  Category_not: String
+  Category_in: [String!]
+  Category_not_in: [String!]
+  Category_lt: String
+  Category_lte: String
+  Category_gt: String
+  Category_gte: String
+  Category_contains: String
+  Category_not_contains: String
+  Category_starts_with: String
+  Category_not_starts_with: String
+  Category_ends_with: String
+  Category_not_ends_with: String
+  Price: Int
+  Price_not: Int
+  Price_in: [Int!]
+  Price_not_in: [Int!]
+  Price_lt: Int
+  Price_lte: Int
+  Price_gt: Int
+  Price_gte: Int
+  Stock: Int
+  Stock_not: Int
+  Stock_in: [Int!]
+  Stock_not_in: [Int!]
+  Stock_lt: Int
+  Stock_lte: Int
+  Stock_gt: Int
+  Stock_gte: Int
+  Brand: String
+  Brand_not: String
+  Brand_in: [String!]
+  Brand_not_in: [String!]
+  Brand_lt: String
+  Brand_lte: String
+  Brand_gt: String
+  Brand_gte: String
+  Brand_contains: String
+  Brand_not_contains: String
+  Brand_starts_with: String
+  Brand_not_starts_with: String
+  Brand_ends_with: String
+  Brand_not_ends_with: String
+  AND: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  NOT: [ItemWhereInput!]
+}
+
+input ItemWhereUniqueInput {
+  ItemId: ID
+  ItemName: String
+}
+
+type LeaveDay {
+  LeaveID: ID!
+  StaffMember: Staff!
+  Day: Int
+  Month: Int
+  Year: Int
+}
+
+type LeaveDayConnection {
+  pageInfo: PageInfo!
+  edges: [LeaveDayEdge]!
+  aggregate: AggregateLeaveDay!
+}
+
+input LeaveDayCreateInput {
+  LeaveID: ID
+  StaffMember: StaffCreateOneInput!
+  Day: Int
+  Month: Int
+  Year: Int
+}
+
+type LeaveDayEdge {
+  node: LeaveDay!
+  cursor: String!
+}
+
+enum LeaveDayOrderByInput {
+  LeaveID_ASC
+  LeaveID_DESC
+  Day_ASC
+  Day_DESC
+  Month_ASC
+  Month_DESC
+  Year_ASC
+  Year_DESC
+}
+
+type LeaveDayPreviousValues {
+  LeaveID: ID!
+  Day: Int
+  Month: Int
+  Year: Int
+}
+
+type LeaveDaySubscriptionPayload {
+  mutation: MutationType!
+  node: LeaveDay
+  updatedFields: [String!]
+  previousValues: LeaveDayPreviousValues
+}
+
+input LeaveDaySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LeaveDayWhereInput
+  AND: [LeaveDaySubscriptionWhereInput!]
+  OR: [LeaveDaySubscriptionWhereInput!]
+  NOT: [LeaveDaySubscriptionWhereInput!]
+}
+
+input LeaveDayUpdateInput {
+  StaffMember: StaffUpdateOneRequiredInput
+  Day: Int
+  Month: Int
+  Year: Int
+}
+
+input LeaveDayUpdateManyMutationInput {
+  Day: Int
+  Month: Int
+  Year: Int
+}
+
+input LeaveDayWhereInput {
+  LeaveID: ID
+  LeaveID_not: ID
+  LeaveID_in: [ID!]
+  LeaveID_not_in: [ID!]
+  LeaveID_lt: ID
+  LeaveID_lte: ID
+  LeaveID_gt: ID
+  LeaveID_gte: ID
+  LeaveID_contains: ID
+  LeaveID_not_contains: ID
+  LeaveID_starts_with: ID
+  LeaveID_not_starts_with: ID
+  LeaveID_ends_with: ID
+  LeaveID_not_ends_with: ID
+  StaffMember: StaffWhereInput
+  Day: Int
+  Day_not: Int
+  Day_in: [Int!]
+  Day_not_in: [Int!]
+  Day_lt: Int
+  Day_lte: Int
+  Day_gt: Int
+  Day_gte: Int
+  Month: Int
+  Month_not: Int
+  Month_in: [Int!]
+  Month_not_in: [Int!]
+  Month_lt: Int
+  Month_lte: Int
+  Month_gt: Int
+  Month_gte: Int
+  Year: Int
+  Year_not: Int
+  Year_in: [Int!]
+  Year_not_in: [Int!]
+  Year_lt: Int
+  Year_lte: Int
+  Year_gt: Int
+  Year_gte: Int
+  AND: [LeaveDayWhereInput!]
+  OR: [LeaveDayWhereInput!]
+  NOT: [LeaveDayWhereInput!]
+}
+
+input LeaveDayWhereUniqueInput {
+  LeaveID: ID
+}
+
 scalar Long
 
 type Mutation {
+  createCakeItem(data: CakeItemCreateInput!): CakeItem!
+  updateCakeItem(data: CakeItemUpdateInput!, where: CakeItemWhereUniqueInput!): CakeItem
+  updateManyCakeItems(data: CakeItemUpdateManyMutationInput!, where: CakeItemWhereInput): BatchPayload!
+  upsertCakeItem(where: CakeItemWhereUniqueInput!, create: CakeItemCreateInput!, update: CakeItemUpdateInput!): CakeItem!
+  deleteCakeItem(where: CakeItemWhereUniqueInput!): CakeItem
+  deleteManyCakeItems(where: CakeItemWhereInput): BatchPayload!
   createCardTemplate(data: CardTemplateCreateInput!): CardTemplate!
   updateCardTemplate(data: CardTemplateUpdateInput!, where: CardTemplateWhereUniqueInput!): CardTemplate
   updateManyCardTemplates(data: CardTemplateUpdateManyMutationInput!, where: CardTemplateWhereInput): BatchPayload!
   upsertCardTemplate(where: CardTemplateWhereUniqueInput!, create: CardTemplateCreateInput!, update: CardTemplateUpdateInput!): CardTemplate!
   deleteCardTemplate(where: CardTemplateWhereUniqueInput!): CardTemplate
   deleteManyCardTemplates(where: CardTemplateWhereInput): BatchPayload!
+  createCustomer(data: CustomerCreateInput!): Customer!
+  updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer
+  updateManyCustomers(data: CustomerUpdateManyMutationInput!, where: CustomerWhereInput): BatchPayload!
+  upsertCustomer(where: CustomerWhereUniqueInput!, create: CustomerCreateInput!, update: CustomerUpdateInput!): Customer!
+  deleteCustomer(where: CustomerWhereUniqueInput!): Customer
+  deleteManyCustomers(where: CustomerWhereInput): BatchPayload!
   createDepartment(data: DepartmentCreateInput!): Department!
   updateDepartment(data: DepartmentUpdateInput!, where: DepartmentWhereUniqueInput!): Department
   updateManyDepartments(data: DepartmentUpdateManyMutationInput!, where: DepartmentWhereInput): BatchPayload!
   upsertDepartment(where: DepartmentWhereUniqueInput!, create: DepartmentCreateInput!, update: DepartmentUpdateInput!): Department!
   deleteDepartment(where: DepartmentWhereUniqueInput!): Department
   deleteManyDepartments(where: DepartmentWhereInput): BatchPayload!
+  createEventPackage(data: EventPackageCreateInput!): EventPackage!
+  updateEventPackage(data: EventPackageUpdateInput!, where: EventPackageWhereUniqueInput!): EventPackage
+  updateManyEventPackages(data: EventPackageUpdateManyMutationInput!, where: EventPackageWhereInput): BatchPayload!
+  upsertEventPackage(where: EventPackageWhereUniqueInput!, create: EventPackageCreateInput!, update: EventPackageUpdateInput!): EventPackage!
+  deleteEventPackage(where: EventPackageWhereUniqueInput!): EventPackage
+  deleteManyEventPackages(where: EventPackageWhereInput): BatchPayload!
+  createItem(data: ItemCreateInput!): Item!
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
+  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
+  upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
+  deleteItem(where: ItemWhereUniqueInput!): Item
+  deleteManyItems(where: ItemWhereInput): BatchPayload!
+  createLeaveDay(data: LeaveDayCreateInput!): LeaveDay!
+  updateLeaveDay(data: LeaveDayUpdateInput!, where: LeaveDayWhereUniqueInput!): LeaveDay
+  updateManyLeaveDays(data: LeaveDayUpdateManyMutationInput!, where: LeaveDayWhereInput): BatchPayload!
+  upsertLeaveDay(where: LeaveDayWhereUniqueInput!, create: LeaveDayCreateInput!, update: LeaveDayUpdateInput!): LeaveDay!
+  deleteLeaveDay(where: LeaveDayWhereUniqueInput!): LeaveDay
+  deleteManyLeaveDays(where: LeaveDayWhereInput): BatchPayload!
+  createPhotoFrameTemplate(data: PhotoFrameTemplateCreateInput!): PhotoFrameTemplate!
+  updatePhotoFrameTemplate(data: PhotoFrameTemplateUpdateInput!, where: PhotoFrameTemplateWhereUniqueInput!): PhotoFrameTemplate
+  updateManyPhotoFrameTemplates(data: PhotoFrameTemplateUpdateManyMutationInput!, where: PhotoFrameTemplateWhereInput): BatchPayload!
+  upsertPhotoFrameTemplate(where: PhotoFrameTemplateWhereUniqueInput!, create: PhotoFrameTemplateCreateInput!, update: PhotoFrameTemplateUpdateInput!): PhotoFrameTemplate!
+  deletePhotoFrameTemplate(where: PhotoFrameTemplateWhereUniqueInput!): PhotoFrameTemplate
+  deleteManyPhotoFrameTemplates(where: PhotoFrameTemplateWhereInput): BatchPayload!
   createPosition(data: PositionCreateInput!): Position!
   updatePosition(data: PositionUpdateInput!, where: PositionWhereUniqueInput!): Position
   updateManyPositions(data: PositionUpdateManyMutationInput!, where: PositionWhereInput): BatchPayload!
   upsertPosition(where: PositionWhereUniqueInput!, create: PositionCreateInput!, update: PositionUpdateInput!): Position!
   deletePosition(where: PositionWhereUniqueInput!): Position
   deleteManyPositions(where: PositionWhereInput): BatchPayload!
-  createStaffMember(data: StaffMemberCreateInput!): StaffMember!
-  updateStaffMember(data: StaffMemberUpdateInput!, where: StaffMemberWhereUniqueInput!): StaffMember
-  updateManyStaffMembers(data: StaffMemberUpdateManyMutationInput!, where: StaffMemberWhereInput): BatchPayload!
-  upsertStaffMember(where: StaffMemberWhereUniqueInput!, create: StaffMemberCreateInput!, update: StaffMemberUpdateInput!): StaffMember!
-  deleteStaffMember(where: StaffMemberWhereUniqueInput!): StaffMember
-  deleteManyStaffMembers(where: StaffMemberWhereInput): BatchPayload!
+  createStaff(data: StaffCreateInput!): Staff!
+  updateStaff(data: StaffUpdateInput!, where: StaffWhereUniqueInput!): Staff
+  updateManyStaffs(data: StaffUpdateManyMutationInput!, where: StaffWhereInput): BatchPayload!
+  upsertStaff(where: StaffWhereUniqueInput!, create: StaffCreateInput!, update: StaffUpdateInput!): Staff!
+  deleteStaff(where: StaffWhereUniqueInput!): Staff
+  deleteManyStaffs(where: StaffWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -393,6 +1285,182 @@ type PageInfo {
   hasPreviousPage: Boolean!
   startCursor: String
   endCursor: String
+}
+
+type PhotoFrameTemplate {
+  FrameID: ID!
+  FrameName: String
+  FrameMaterial: String
+  PhotoFinish: String
+  Price: Int
+  Dimensions: String
+}
+
+type PhotoFrameTemplateConnection {
+  pageInfo: PageInfo!
+  edges: [PhotoFrameTemplateEdge]!
+  aggregate: AggregatePhotoFrameTemplate!
+}
+
+input PhotoFrameTemplateCreateInput {
+  FrameID: ID
+  FrameName: String
+  FrameMaterial: String
+  PhotoFinish: String
+  Price: Int
+  Dimensions: String
+}
+
+type PhotoFrameTemplateEdge {
+  node: PhotoFrameTemplate!
+  cursor: String!
+}
+
+enum PhotoFrameTemplateOrderByInput {
+  FrameID_ASC
+  FrameID_DESC
+  FrameName_ASC
+  FrameName_DESC
+  FrameMaterial_ASC
+  FrameMaterial_DESC
+  PhotoFinish_ASC
+  PhotoFinish_DESC
+  Price_ASC
+  Price_DESC
+  Dimensions_ASC
+  Dimensions_DESC
+}
+
+type PhotoFrameTemplatePreviousValues {
+  FrameID: ID!
+  FrameName: String
+  FrameMaterial: String
+  PhotoFinish: String
+  Price: Int
+  Dimensions: String
+}
+
+type PhotoFrameTemplateSubscriptionPayload {
+  mutation: MutationType!
+  node: PhotoFrameTemplate
+  updatedFields: [String!]
+  previousValues: PhotoFrameTemplatePreviousValues
+}
+
+input PhotoFrameTemplateSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PhotoFrameTemplateWhereInput
+  AND: [PhotoFrameTemplateSubscriptionWhereInput!]
+  OR: [PhotoFrameTemplateSubscriptionWhereInput!]
+  NOT: [PhotoFrameTemplateSubscriptionWhereInput!]
+}
+
+input PhotoFrameTemplateUpdateInput {
+  FrameName: String
+  FrameMaterial: String
+  PhotoFinish: String
+  Price: Int
+  Dimensions: String
+}
+
+input PhotoFrameTemplateUpdateManyMutationInput {
+  FrameName: String
+  FrameMaterial: String
+  PhotoFinish: String
+  Price: Int
+  Dimensions: String
+}
+
+input PhotoFrameTemplateWhereInput {
+  FrameID: ID
+  FrameID_not: ID
+  FrameID_in: [ID!]
+  FrameID_not_in: [ID!]
+  FrameID_lt: ID
+  FrameID_lte: ID
+  FrameID_gt: ID
+  FrameID_gte: ID
+  FrameID_contains: ID
+  FrameID_not_contains: ID
+  FrameID_starts_with: ID
+  FrameID_not_starts_with: ID
+  FrameID_ends_with: ID
+  FrameID_not_ends_with: ID
+  FrameName: String
+  FrameName_not: String
+  FrameName_in: [String!]
+  FrameName_not_in: [String!]
+  FrameName_lt: String
+  FrameName_lte: String
+  FrameName_gt: String
+  FrameName_gte: String
+  FrameName_contains: String
+  FrameName_not_contains: String
+  FrameName_starts_with: String
+  FrameName_not_starts_with: String
+  FrameName_ends_with: String
+  FrameName_not_ends_with: String
+  FrameMaterial: String
+  FrameMaterial_not: String
+  FrameMaterial_in: [String!]
+  FrameMaterial_not_in: [String!]
+  FrameMaterial_lt: String
+  FrameMaterial_lte: String
+  FrameMaterial_gt: String
+  FrameMaterial_gte: String
+  FrameMaterial_contains: String
+  FrameMaterial_not_contains: String
+  FrameMaterial_starts_with: String
+  FrameMaterial_not_starts_with: String
+  FrameMaterial_ends_with: String
+  FrameMaterial_not_ends_with: String
+  PhotoFinish: String
+  PhotoFinish_not: String
+  PhotoFinish_in: [String!]
+  PhotoFinish_not_in: [String!]
+  PhotoFinish_lt: String
+  PhotoFinish_lte: String
+  PhotoFinish_gt: String
+  PhotoFinish_gte: String
+  PhotoFinish_contains: String
+  PhotoFinish_not_contains: String
+  PhotoFinish_starts_with: String
+  PhotoFinish_not_starts_with: String
+  PhotoFinish_ends_with: String
+  PhotoFinish_not_ends_with: String
+  Price: Int
+  Price_not: Int
+  Price_in: [Int!]
+  Price_not_in: [Int!]
+  Price_lt: Int
+  Price_lte: Int
+  Price_gt: Int
+  Price_gte: Int
+  Dimensions: String
+  Dimensions_not: String
+  Dimensions_in: [String!]
+  Dimensions_not_in: [String!]
+  Dimensions_lt: String
+  Dimensions_lte: String
+  Dimensions_gt: String
+  Dimensions_gte: String
+  Dimensions_contains: String
+  Dimensions_not_contains: String
+  Dimensions_starts_with: String
+  Dimensions_not_starts_with: String
+  Dimensions_ends_with: String
+  Dimensions_not_ends_with: String
+  AND: [PhotoFrameTemplateWhereInput!]
+  OR: [PhotoFrameTemplateWhereInput!]
+  NOT: [PhotoFrameTemplateWhereInput!]
+}
+
+input PhotoFrameTemplateWhereUniqueInput {
+  FrameID: ID
+  FrameName: String
 }
 
 type Position {
@@ -576,282 +1644,330 @@ input PositionWhereInput {
 
 input PositionWhereUniqueInput {
   positionId: ID
+  jobRole: String
 }
 
 type Query {
+  cakeItem(where: CakeItemWhereUniqueInput!): CakeItem
+  cakeItems(where: CakeItemWhereInput, orderBy: CakeItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CakeItem]!
+  cakeItemsConnection(where: CakeItemWhereInput, orderBy: CakeItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CakeItemConnection!
   cardTemplate(where: CardTemplateWhereUniqueInput!): CardTemplate
   cardTemplates(where: CardTemplateWhereInput, orderBy: CardTemplateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CardTemplate]!
   cardTemplatesConnection(where: CardTemplateWhereInput, orderBy: CardTemplateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardTemplateConnection!
+  customer(where: CustomerWhereUniqueInput!): Customer
+  customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer]!
+  customersConnection(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerConnection!
   department(where: DepartmentWhereUniqueInput!): Department
   departments(where: DepartmentWhereInput, orderBy: DepartmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Department]!
   departmentsConnection(where: DepartmentWhereInput, orderBy: DepartmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DepartmentConnection!
+  eventPackage(where: EventPackageWhereUniqueInput!): EventPackage
+  eventPackages(where: EventPackageWhereInput, orderBy: EventPackageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventPackage]!
+  eventPackagesConnection(where: EventPackageWhereInput, orderBy: EventPackageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventPackageConnection!
+  item(where: ItemWhereUniqueInput!): Item
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
+  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  leaveDay(where: LeaveDayWhereUniqueInput!): LeaveDay
+  leaveDays(where: LeaveDayWhereInput, orderBy: LeaveDayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LeaveDay]!
+  leaveDaysConnection(where: LeaveDayWhereInput, orderBy: LeaveDayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeaveDayConnection!
+  photoFrameTemplate(where: PhotoFrameTemplateWhereUniqueInput!): PhotoFrameTemplate
+  photoFrameTemplates(where: PhotoFrameTemplateWhereInput, orderBy: PhotoFrameTemplateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhotoFrameTemplate]!
+  photoFrameTemplatesConnection(where: PhotoFrameTemplateWhereInput, orderBy: PhotoFrameTemplateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PhotoFrameTemplateConnection!
   position(where: PositionWhereUniqueInput!): Position
   positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position]!
   positionsConnection(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PositionConnection!
-  staffMember(where: StaffMemberWhereUniqueInput!): StaffMember
-  staffMembers(where: StaffMemberWhereInput, orderBy: StaffMemberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StaffMember]!
-  staffMembersConnection(where: StaffMemberWhereInput, orderBy: StaffMemberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StaffMemberConnection!
+  staff(where: StaffWhereUniqueInput!): Staff
+  staffs(where: StaffWhereInput, orderBy: StaffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Staff]!
+  staffsConnection(where: StaffWhereInput, orderBy: StaffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StaffConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
-type StaffMember {
-  EmployeeId: ID!
-  EmployeeName: String
-  Nic: String
-  BancAccountNumber: String
-  Position: Position
-  Address: String
-  PhoneNumber: String
-  HomeNumber: String
-  WorkEmail: String
-  Password: String
+type Staff {
+  employeeID: ID!
+  employeeName: String
+  nicNumber: String
+  bankAccountNumber: String
+  position: Position
+  address: String
+  phoneNumber: String
+  workEmail: String
+  password: String
+  Age: Int
 }
 
-type StaffMemberConnection {
+type StaffConnection {
   pageInfo: PageInfo!
-  edges: [StaffMemberEdge]!
-  aggregate: AggregateStaffMember!
+  edges: [StaffEdge]!
+  aggregate: AggregateStaff!
 }
 
-input StaffMemberCreateInput {
-  EmployeeId: ID
-  EmployeeName: String
-  Nic: String
-  BancAccountNumber: String
-  Position: PositionCreateOneInput
-  Address: String
-  PhoneNumber: String
-  HomeNumber: String
-  WorkEmail: String
-  Password: String
+input StaffCreateInput {
+  employeeID: ID
+  employeeName: String
+  nicNumber: String
+  bankAccountNumber: String
+  position: PositionCreateOneInput
+  address: String
+  phoneNumber: String
+  workEmail: String
+  password: String
+  Age: Int
 }
 
-type StaffMemberEdge {
-  node: StaffMember!
+input StaffCreateOneInput {
+  create: StaffCreateInput
+  connect: StaffWhereUniqueInput
+}
+
+type StaffEdge {
+  node: Staff!
   cursor: String!
 }
 
-enum StaffMemberOrderByInput {
-  EmployeeId_ASC
-  EmployeeId_DESC
-  EmployeeName_ASC
-  EmployeeName_DESC
-  Nic_ASC
-  Nic_DESC
-  BancAccountNumber_ASC
-  BancAccountNumber_DESC
-  Address_ASC
-  Address_DESC
-  PhoneNumber_ASC
-  PhoneNumber_DESC
-  HomeNumber_ASC
-  HomeNumber_DESC
-  WorkEmail_ASC
-  WorkEmail_DESC
-  Password_ASC
-  Password_DESC
+enum StaffOrderByInput {
+  employeeID_ASC
+  employeeID_DESC
+  employeeName_ASC
+  employeeName_DESC
+  nicNumber_ASC
+  nicNumber_DESC
+  bankAccountNumber_ASC
+  bankAccountNumber_DESC
+  address_ASC
+  address_DESC
+  phoneNumber_ASC
+  phoneNumber_DESC
+  workEmail_ASC
+  workEmail_DESC
+  password_ASC
+  password_DESC
+  Age_ASC
+  Age_DESC
 }
 
-type StaffMemberPreviousValues {
-  EmployeeId: ID!
-  EmployeeName: String
-  Nic: String
-  BancAccountNumber: String
-  Address: String
-  PhoneNumber: String
-  HomeNumber: String
-  WorkEmail: String
-  Password: String
+type StaffPreviousValues {
+  employeeID: ID!
+  employeeName: String
+  nicNumber: String
+  bankAccountNumber: String
+  address: String
+  phoneNumber: String
+  workEmail: String
+  password: String
+  Age: Int
 }
 
-type StaffMemberSubscriptionPayload {
+type StaffSubscriptionPayload {
   mutation: MutationType!
-  node: StaffMember
+  node: Staff
   updatedFields: [String!]
-  previousValues: StaffMemberPreviousValues
+  previousValues: StaffPreviousValues
 }
 
-input StaffMemberSubscriptionWhereInput {
+input StaffSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: StaffMemberWhereInput
-  AND: [StaffMemberSubscriptionWhereInput!]
-  OR: [StaffMemberSubscriptionWhereInput!]
-  NOT: [StaffMemberSubscriptionWhereInput!]
+  node: StaffWhereInput
+  AND: [StaffSubscriptionWhereInput!]
+  OR: [StaffSubscriptionWhereInput!]
+  NOT: [StaffSubscriptionWhereInput!]
 }
 
-input StaffMemberUpdateInput {
-  EmployeeName: String
-  Nic: String
-  BancAccountNumber: String
-  Position: PositionUpdateOneInput
-  Address: String
-  PhoneNumber: String
-  HomeNumber: String
-  WorkEmail: String
-  Password: String
+input StaffUpdateDataInput {
+  employeeName: String
+  nicNumber: String
+  bankAccountNumber: String
+  position: PositionUpdateOneInput
+  address: String
+  phoneNumber: String
+  workEmail: String
+  password: String
+  Age: Int
 }
 
-input StaffMemberUpdateManyMutationInput {
-  EmployeeName: String
-  Nic: String
-  BancAccountNumber: String
-  Address: String
-  PhoneNumber: String
-  HomeNumber: String
-  WorkEmail: String
-  Password: String
+input StaffUpdateInput {
+  employeeName: String
+  nicNumber: String
+  bankAccountNumber: String
+  position: PositionUpdateOneInput
+  address: String
+  phoneNumber: String
+  workEmail: String
+  password: String
+  Age: Int
 }
 
-input StaffMemberWhereInput {
-  EmployeeId: ID
-  EmployeeId_not: ID
-  EmployeeId_in: [ID!]
-  EmployeeId_not_in: [ID!]
-  EmployeeId_lt: ID
-  EmployeeId_lte: ID
-  EmployeeId_gt: ID
-  EmployeeId_gte: ID
-  EmployeeId_contains: ID
-  EmployeeId_not_contains: ID
-  EmployeeId_starts_with: ID
-  EmployeeId_not_starts_with: ID
-  EmployeeId_ends_with: ID
-  EmployeeId_not_ends_with: ID
-  EmployeeName: String
-  EmployeeName_not: String
-  EmployeeName_in: [String!]
-  EmployeeName_not_in: [String!]
-  EmployeeName_lt: String
-  EmployeeName_lte: String
-  EmployeeName_gt: String
-  EmployeeName_gte: String
-  EmployeeName_contains: String
-  EmployeeName_not_contains: String
-  EmployeeName_starts_with: String
-  EmployeeName_not_starts_with: String
-  EmployeeName_ends_with: String
-  EmployeeName_not_ends_with: String
-  Nic: String
-  Nic_not: String
-  Nic_in: [String!]
-  Nic_not_in: [String!]
-  Nic_lt: String
-  Nic_lte: String
-  Nic_gt: String
-  Nic_gte: String
-  Nic_contains: String
-  Nic_not_contains: String
-  Nic_starts_with: String
-  Nic_not_starts_with: String
-  Nic_ends_with: String
-  Nic_not_ends_with: String
-  BancAccountNumber: String
-  BancAccountNumber_not: String
-  BancAccountNumber_in: [String!]
-  BancAccountNumber_not_in: [String!]
-  BancAccountNumber_lt: String
-  BancAccountNumber_lte: String
-  BancAccountNumber_gt: String
-  BancAccountNumber_gte: String
-  BancAccountNumber_contains: String
-  BancAccountNumber_not_contains: String
-  BancAccountNumber_starts_with: String
-  BancAccountNumber_not_starts_with: String
-  BancAccountNumber_ends_with: String
-  BancAccountNumber_not_ends_with: String
-  Position: PositionWhereInput
-  Address: String
-  Address_not: String
-  Address_in: [String!]
-  Address_not_in: [String!]
-  Address_lt: String
-  Address_lte: String
-  Address_gt: String
-  Address_gte: String
-  Address_contains: String
-  Address_not_contains: String
-  Address_starts_with: String
-  Address_not_starts_with: String
-  Address_ends_with: String
-  Address_not_ends_with: String
-  PhoneNumber: String
-  PhoneNumber_not: String
-  PhoneNumber_in: [String!]
-  PhoneNumber_not_in: [String!]
-  PhoneNumber_lt: String
-  PhoneNumber_lte: String
-  PhoneNumber_gt: String
-  PhoneNumber_gte: String
-  PhoneNumber_contains: String
-  PhoneNumber_not_contains: String
-  PhoneNumber_starts_with: String
-  PhoneNumber_not_starts_with: String
-  PhoneNumber_ends_with: String
-  PhoneNumber_not_ends_with: String
-  HomeNumber: String
-  HomeNumber_not: String
-  HomeNumber_in: [String!]
-  HomeNumber_not_in: [String!]
-  HomeNumber_lt: String
-  HomeNumber_lte: String
-  HomeNumber_gt: String
-  HomeNumber_gte: String
-  HomeNumber_contains: String
-  HomeNumber_not_contains: String
-  HomeNumber_starts_with: String
-  HomeNumber_not_starts_with: String
-  HomeNumber_ends_with: String
-  HomeNumber_not_ends_with: String
-  WorkEmail: String
-  WorkEmail_not: String
-  WorkEmail_in: [String!]
-  WorkEmail_not_in: [String!]
-  WorkEmail_lt: String
-  WorkEmail_lte: String
-  WorkEmail_gt: String
-  WorkEmail_gte: String
-  WorkEmail_contains: String
-  WorkEmail_not_contains: String
-  WorkEmail_starts_with: String
-  WorkEmail_not_starts_with: String
-  WorkEmail_ends_with: String
-  WorkEmail_not_ends_with: String
-  Password: String
-  Password_not: String
-  Password_in: [String!]
-  Password_not_in: [String!]
-  Password_lt: String
-  Password_lte: String
-  Password_gt: String
-  Password_gte: String
-  Password_contains: String
-  Password_not_contains: String
-  Password_starts_with: String
-  Password_not_starts_with: String
-  Password_ends_with: String
-  Password_not_ends_with: String
-  AND: [StaffMemberWhereInput!]
-  OR: [StaffMemberWhereInput!]
-  NOT: [StaffMemberWhereInput!]
+input StaffUpdateManyMutationInput {
+  employeeName: String
+  nicNumber: String
+  bankAccountNumber: String
+  address: String
+  phoneNumber: String
+  workEmail: String
+  password: String
+  Age: Int
 }
 
-input StaffMemberWhereUniqueInput {
-  EmployeeId: ID
-  Nic: String
-  WorkEmail: String
+input StaffUpdateOneRequiredInput {
+  create: StaffCreateInput
+  update: StaffUpdateDataInput
+  upsert: StaffUpsertNestedInput
+  connect: StaffWhereUniqueInput
+}
+
+input StaffUpsertNestedInput {
+  update: StaffUpdateDataInput!
+  create: StaffCreateInput!
+}
+
+input StaffWhereInput {
+  employeeID: ID
+  employeeID_not: ID
+  employeeID_in: [ID!]
+  employeeID_not_in: [ID!]
+  employeeID_lt: ID
+  employeeID_lte: ID
+  employeeID_gt: ID
+  employeeID_gte: ID
+  employeeID_contains: ID
+  employeeID_not_contains: ID
+  employeeID_starts_with: ID
+  employeeID_not_starts_with: ID
+  employeeID_ends_with: ID
+  employeeID_not_ends_with: ID
+  employeeName: String
+  employeeName_not: String
+  employeeName_in: [String!]
+  employeeName_not_in: [String!]
+  employeeName_lt: String
+  employeeName_lte: String
+  employeeName_gt: String
+  employeeName_gte: String
+  employeeName_contains: String
+  employeeName_not_contains: String
+  employeeName_starts_with: String
+  employeeName_not_starts_with: String
+  employeeName_ends_with: String
+  employeeName_not_ends_with: String
+  nicNumber: String
+  nicNumber_not: String
+  nicNumber_in: [String!]
+  nicNumber_not_in: [String!]
+  nicNumber_lt: String
+  nicNumber_lte: String
+  nicNumber_gt: String
+  nicNumber_gte: String
+  nicNumber_contains: String
+  nicNumber_not_contains: String
+  nicNumber_starts_with: String
+  nicNumber_not_starts_with: String
+  nicNumber_ends_with: String
+  nicNumber_not_ends_with: String
+  bankAccountNumber: String
+  bankAccountNumber_not: String
+  bankAccountNumber_in: [String!]
+  bankAccountNumber_not_in: [String!]
+  bankAccountNumber_lt: String
+  bankAccountNumber_lte: String
+  bankAccountNumber_gt: String
+  bankAccountNumber_gte: String
+  bankAccountNumber_contains: String
+  bankAccountNumber_not_contains: String
+  bankAccountNumber_starts_with: String
+  bankAccountNumber_not_starts_with: String
+  bankAccountNumber_ends_with: String
+  bankAccountNumber_not_ends_with: String
+  position: PositionWhereInput
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  phoneNumber: String
+  phoneNumber_not: String
+  phoneNumber_in: [String!]
+  phoneNumber_not_in: [String!]
+  phoneNumber_lt: String
+  phoneNumber_lte: String
+  phoneNumber_gt: String
+  phoneNumber_gte: String
+  phoneNumber_contains: String
+  phoneNumber_not_contains: String
+  phoneNumber_starts_with: String
+  phoneNumber_not_starts_with: String
+  phoneNumber_ends_with: String
+  phoneNumber_not_ends_with: String
+  workEmail: String
+  workEmail_not: String
+  workEmail_in: [String!]
+  workEmail_not_in: [String!]
+  workEmail_lt: String
+  workEmail_lte: String
+  workEmail_gt: String
+  workEmail_gte: String
+  workEmail_contains: String
+  workEmail_not_contains: String
+  workEmail_starts_with: String
+  workEmail_not_starts_with: String
+  workEmail_ends_with: String
+  workEmail_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  Age: Int
+  Age_not: Int
+  Age_in: [Int!]
+  Age_not_in: [Int!]
+  Age_lt: Int
+  Age_lte: Int
+  Age_gt: Int
+  Age_gte: Int
+  AND: [StaffWhereInput!]
+  OR: [StaffWhereInput!]
+  NOT: [StaffWhereInput!]
+}
+
+input StaffWhereUniqueInput {
+  employeeID: ID
+  employeeName: String
+  nicNumber: String
 }
 
 type Subscription {
+  cakeItem(where: CakeItemSubscriptionWhereInput): CakeItemSubscriptionPayload
   cardTemplate(where: CardTemplateSubscriptionWhereInput): CardTemplateSubscriptionPayload
+  customer(where: CustomerSubscriptionWhereInput): CustomerSubscriptionPayload
   department(where: DepartmentSubscriptionWhereInput): DepartmentSubscriptionPayload
+  eventPackage(where: EventPackageSubscriptionWhereInput): EventPackageSubscriptionPayload
+  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
+  leaveDay(where: LeaveDaySubscriptionWhereInput): LeaveDaySubscriptionPayload
+  photoFrameTemplate(where: PhotoFrameTemplateSubscriptionWhereInput): PhotoFrameTemplateSubscriptionPayload
   position(where: PositionSubscriptionWhereInput): PositionSubscriptionPayload
-  staffMember(where: StaffMemberSubscriptionWhereInput): StaffMemberSubscriptionPayload
+  staff(where: StaffSubscriptionWhereInput): StaffSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

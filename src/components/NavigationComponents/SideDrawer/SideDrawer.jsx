@@ -12,20 +12,25 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Badge from '@material-ui/core/Badge';
-
+import {Typography} from '@material-ui/core'
 import SideDrawerLink from './SideDrawerLink'
 import SideDrawerMyOrders from './SideDrawerMyOrders'
+import useGlobal from 'reactn'
+import {Link} from 'react-router-dom'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles( theme => ({
     list: {
         width: 250,
     },
     fullList: {
         width: 'auto',
     },
-});
+}));
 
 export default function TemporaryDrawer() {
+
+    
+
     const classes = useStyles();
     const [state, setState] = React.useState({
         top: false,
@@ -50,15 +55,253 @@ export default function TemporaryDrawer() {
           onKeyDown={toggleDrawer(side, false)}
         >
           <List>
-            <SideDrawerLink text = "Home" icon = { <InboxIcon />} address = "Home"/>
-            <SideDrawerLink text = "CakeShop" address = "CakeShop"/>
-            <SideDrawerLink text = "Photography Service" address = "PhotoGraphy"/>
+              <ListItem>
+                <Typography variant = "body1">
+                    Employee Management
+                </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/CreateEmployee">
+                        Add Employee
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchEmployees">
+                        Search Employee
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
+          </List>
+
+          <Divider />
+          <List>
+            <ListItem>
+                <Typography variant = "body1">
+                    Customer Management
+                </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/CreateCustomer">
+                        Add Customer
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchCustomer">
+                        Search Customer
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/UpdateLoyalityPoints">
+                        Update Loyality Points
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
           </List>
           <Divider />
           <List>
-          <ListItem>My Orders</ListItem>
-          <SideDrawerMyOrders/>
+              <ListItem>
+                <Typography variant = "body1">
+                    Item Management
+                </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/CreateItem">
+                        Add Item
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchItem">
+                        Search Item
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
           </List>
+
+          <Divider />
+          <List>
+            <ListItem>
+                <Typography variant = "body1">
+                    Leave Management
+                </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchEmployees">
+                        Add Leave
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchLeaveDay">
+                        Search Leave
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+              <ListItem>
+                    <Typography variant = "body1">
+                        Card Management
+                    </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/CreateCardTemplate">
+                        Add Card
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/StaffSearchCard">
+                        Search Card
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
+          </List>
+
+          <Divider />
+          <List>
+                <ListItem>
+                    <Typography variant = "body1">
+                        Event Management
+                    </Typography>
+                </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/CreateEvent">
+                        Add Event
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchEventPackages">
+                        Search Event
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
+          </List>
+        
+          <Divider />
+          <List>
+              <ListItem>
+                    <Typography variant = "body1">
+                        Photo Frame Management
+                    </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/CreatePhotoFrame">
+                        Add Photo Frame
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link to =  "/staff/SearchPhotoFrame">
+                        Search Photo Frame
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
+          </List>
+
+          <Divider />
+          <Divider />
+          <List>
+              <ListItem>
+                    <Typography variant = "body1">
+                        Cake Management
+                    </Typography>
+              </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Add Card
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Search Card
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    <Link>
+                        Report
+                    </Link>
+                </ListItemText>
+            </ListItem>
+          </List>
+
+          <Divider />
+
+          
         </div>
       );
     
@@ -69,7 +312,13 @@ export default function TemporaryDrawer() {
     
     return (
         <>       
-                <IconButton edge="start"  color="inherit" aria-label="menu" onClick={toggleDrawer('left', true)} >
+                <IconButton 
+                    edge="start"  
+                    color="inherit" 
+                    aria-label="menu" 
+                    onClick={toggleDrawer('left', true)} 
+                   
+                    >
                     <MenuIcon fontSize="64"/>
                 </IconButton>
                  <Drawer anchor="left" open={state.left} >

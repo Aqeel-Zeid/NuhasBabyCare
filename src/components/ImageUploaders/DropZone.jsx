@@ -1,6 +1,6 @@
 import React, {useEffect, useState , useMemo, useGlobal} from 'reactn';
 import {useDropzone} from 'react-dropzone';
-import { Button } from '@material-ui/core';
+import { Button , Container} from '@material-ui/core';
 
 import S3FileUpload from 'react-s3';
  
@@ -121,7 +121,7 @@ function Previews(props) {
   }, [files]);
 
   return (
-    <section className="container">
+    <Container>
       <div {...getRootProps({style})}>
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here, or click to select files</p>
@@ -130,7 +130,7 @@ function Previews(props) {
         </aside>
         
       </div>
-    </section>
+      </Container>
   );
 }
 

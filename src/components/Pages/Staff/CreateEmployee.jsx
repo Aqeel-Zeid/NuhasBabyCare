@@ -1,15 +1,28 @@
 import React from 'react'
 import CreateEmployeeForm from '../../Forms/CreateEmployeeForm'
-import {Container, Typography} from '@material-ui/core'
+import {Container, Typography, Grid} from '@material-ui/core'
 
 function CreateEmployee() {
     return (
-        <div>
-            <Typography variant = "h2">
-                Create Employee
-            </Typography>
-            <CreateEmployeeForm />
-        </div>
+        <Container>
+            <Grid container>
+                    <Grid item xs = "12">
+                        <br/>
+                    </Grid>
+            </Grid>
+            <Grid item xs = "12">
+                <Typography variant = "h2">
+                    Create Employee
+                </Typography>
+            </Grid>
+            <Grid item xs = "12">
+                        <br/>
+            </Grid>
+            <Grid item xs = "12">
+                <CreateEmployeeForm />
+            </Grid>
+            
+        </Container>
     )
 }
 

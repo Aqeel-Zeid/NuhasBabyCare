@@ -17,11 +17,35 @@ var models = [
     embedded: false
   },
   {
-    name: "StaffMember",
+    name: "Staff",
     embedded: false
   },
   {
     name: "CardTemplate",
+    embedded: false
+  },
+  {
+    name: "PhotoFrameTemplate",
+    embedded: false
+  },
+  {
+    name: "Item",
+    embedded: false
+  },
+  {
+    name: "LeaveDay",
+    embedded: false
+  },
+  {
+    name: "EventPackage",
+    embedded: false
+  },
+  {
+    name: "Customer",
+    embedded: false
+  },
+  {
+    name: "CakeItem",
     embedded: false
   }
 ];
